@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{b39c612c-476d-49a3-9482-bc4ab8f55860}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR 
+	bEnable 				: BOOL;
+	bStart					: BOOL;
+	nINT 					: INT		:= -32768;
+	nUINT 					: UINT		:= 65535;
+	fREAL 					: REAL		:= 255.255;
+	sPowerStatus			: STRING 	:= 'Power Off';
+	nIntToFloat				: INT		:= 25;
+	fFloatToInt				: LREAL		:= 33.333;
+	fIntToFloatConverted 	: LREAL;
+    nFloatToIntConverted 	: INT;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[bEnable := bStart; 
+
+fIntToFloatConverted := TO_REAL(nIntToFloat);
+nFloatToIntConverted := TO_INT(fFloatToInt);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
