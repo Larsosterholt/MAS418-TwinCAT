@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.55" ClassName="CNestedPlcProjDef">
 	<Project GUID="{387B349F-C589-491D-9E11-92D80006F9D9}" Name="MAS418-Crane-Simulator-1" PrjFilePath="..\..\MAS418-Crane-Simulator-1\MAS418-Crane-Simulator-1.plcproj" TmcFilePath="..\..\MAS418-Crane-Simulator-1\MAS418-Crane-Simulator-1.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="1" TmcPath="MAS418-Crane-Simulator-1\MAS418-Crane-Simulator-1.tmc" TmcHash="{C7690FB2-3D24-C78F-B0EC-B2A46300155F}">
+		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="1" TmcPath="MAS418-Crane-Simulator-1\MAS418-Crane-Simulator-1.tmc" TmcHash="{32B15C20-E863-B90A-091C-2352ED342C9E}">
 			<Name>MAS418-Crane-Simulator-1 Instance</Name>
 			<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 			<Contexts>
@@ -11,7 +11,7 @@
 					<ManualConfig>
 						<OTCID>#x02010040</OTCID>
 					</ManualConfig>
-					<Priority>1</Priority>
+					<Priority>4</Priority>
 					<CycleTime>100000</CycleTime>
 				</Context>
 				<Context>
@@ -20,13 +20,13 @@
 					<ManualConfig>
 						<OTCID>#x02010030</OTCID>
 					</ManualConfig>
-					<Priority>20</Priority>
+					<Priority>8</Priority>
 					<CycleTime>10000000</CycleTime>
 				</Context>
 			</Contexts>
 			<TaskPouOids>
-				<TaskPouOid Prio="1" OTCID="#x08502001"/>
-				<TaskPouOid Prio="20" OTCID="#x08502002"/>
+				<TaskPouOid Prio="4" OTCID="#x08502001"/>
+				<TaskPouOid Prio="8" OTCID="#x08502002"/>
 			</TaskPouOids>
 		</Instance>
 	</Project>

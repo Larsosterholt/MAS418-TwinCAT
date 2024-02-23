@@ -3,7 +3,7 @@
   <Task Name="Simulator_1" Id="{57887cc8-7677-416d-bfde-285c999eb751}">
     <!--CycleTime in micro seconds.-->
     <CycleTime>100</CycleTime>
-    <Priority>1</Priority>
+    <Priority>4</Priority>
     <PouCall>
       <Name>P_Simulator</Name>
     </PouCall>

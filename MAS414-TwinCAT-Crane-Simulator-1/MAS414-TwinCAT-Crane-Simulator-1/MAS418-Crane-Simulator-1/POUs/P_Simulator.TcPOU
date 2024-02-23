@@ -7,13 +7,17 @@ VAR
 	bSimulatorOn 	: BOOL;
 	fCylPos 		: LREAL;
 	fUDCV			: LREAL;
+	fPpBar			: LREAL;
+	fPrBar			: LREAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[fbSimulator(
 	ssMethodType 	:= BOOL_TO_SINT(bSimulatorOn),
 	uDCV			:= fUDCV,
-	xm 				=> fCylPos
+	xm 				=> fCylPos,
+	ppbar			=> fPpBar,
+	prbar			=> fPrBar
 );
 
 
