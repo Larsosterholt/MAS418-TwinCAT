@@ -6,7 +6,8 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[P_Task1();
+P_Task2();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

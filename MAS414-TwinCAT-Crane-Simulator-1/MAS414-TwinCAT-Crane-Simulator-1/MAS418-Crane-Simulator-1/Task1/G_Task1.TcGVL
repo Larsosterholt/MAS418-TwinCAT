@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="G_Task1" Id="{10ddb8b2-088a-4c81-8744-f71ee96901d8}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	dtCurrentDateTime 		: DATE_AND_TIME;
+	tdTimeVar				: TIME 				:= T#5S;
+	aArrayOfFourDataTimeVar	: ARRAY[0..3] OF DATE_AND_TIME
+	:= [DT#2023-02-07-0:0:10, DT#2023-02-08-0:0:10, DT#2023-02-09-0:0:10, DT#2023-02-10-0:0:10];
+	sensor1					: E_SensorBrands 	:= E_SensorBrands.Bosch;
+	bStartTimer				: BOOL				:= FALSE;
+	bTimerOutput			: BOOL				:= FALSE;
+	tElapsedTime			: TIME				:= T#0S;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

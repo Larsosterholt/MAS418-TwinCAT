@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="P_Task1" Id="{6db53247-8693-4b52-8630-4437afb5913d}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_Task1
+VAR
+	bTestVar 			: BOOL 	:= FALSE;	
+	bTestVar2 			: BOOL  := FALSE;
+	pDateTime 			: POINTER TO DATE_AND_TIME;
+	rTimeVar			: REFERENCE TO TIME := G_Task1.tdTimeVar;
+	aInstanceOfArrayOfFourDataTimeVar : ARRAY[0..3] OF DATE_AND_TIME 
+	:= G_Task1.aArrayOfFourDataTimeVar;
+	fbTon				: TON	:= (PT:=T#10S);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[pDateTime := ADR(G_Task1.dtCurrentDateTime);
+
+IF NOT bTestVar THEN
+	pDateTime^ := DT#2015-02-04-07:31:19;
+	bTestVar := TRUE;
+END_IF
+
+IF bTestVar2 THEN
+	pDateTime^ := DT#2023-02-08-15:31:19;
+	rTimeVar := T#10S;
+	aInstanceOfArrayOfFourDataTimeVar[3] := DT#2023-02-25-0:0:10;
+	G_Task1.sensor1 := E_SensorBrands.Parker;
+END_IF
+
+fbTon(IN := G_Task1.bStartTimer,
+	  Q => G_Task1.bTimerOutput,
+	  ET => G_Task1.tElapsedTime);
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

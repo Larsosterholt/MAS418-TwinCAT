@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="P_Task2" Id="{476698b6-9666-4670-a714-d40bade0c0ac}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_Task2
+VAR
+	// Task 2
+	fbTof				: TOF	:= (PT:=G_Task2.stTimer2.tTimer);
+	
+	// Task 3	
+	fbRTrig 			: R_TRIG;
+	bTriggerd			: BOOL;
+	bUpdateMotorSpeed 	: BOOL;
+    fNewMotorSpeed 		: REAL := 55.55;
+	eCraneStates		: E_CraneStates := E_CraneStates.Off;
+	sTestString			: STRING(20);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Task 2
+fbTof(IN := G_Task2.stTimer2.bStartTimer,
+	  Q => G_Task2.stTimer2.bTimerOutput,
+	  ET => G_Task2.stTimer2.tElapsedTime);
+
+	  
+F_DegToRad(fAngleDeg := G_Task2.fAngleMotor1Deg,
+		   fAngleRad => G_Task2.fAngleMotor1Rad);
+		   
+// Task 3
+fbRTrig(CLK := bUpdateMotorSpeed,
+		Q => bTriggerd);
+
+F_UpdateParameter(bUpdateValue := bTriggerd,
+				  fNewValue := fNewMotorSpeed,
+				  stMotorParameters := G_Task2.stMotorParameters);
+			
+F_UpdateParameterRef(bUpdateValue := bTriggerd,
+					fNewValue := fNewMotorSpeed,
+					stMotorParameters := G_Task2.stMotorParameters2);				  
+
+CASE eCraneStates OF
+	E_CraneStates.Off:
+		sTestString := 'OFF';
+		IF bTriggerd THEN
+			eCraneStates := E_CraneStates.Manual;
+		END_IF
+	E_CraneStates.Manual:
+		sTestString := 'Manual';
+	E_CraneStates.Auto:
+		sTestString := 'Auto';
+END_CASE
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
