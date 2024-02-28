@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_SimulatorExample" Id="{b8d57163-0493-4420-b561-bd0b46a41bcd}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SimulatorExample
+VAR_INPUT
+	eSiulatorStates		: E_SimulatorStates;
+	stWaterTankStates	: REFERENCE TO ST_WaterTankStates;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE eSiulatorStates OF
+	E_SimulatorStates.Run:
+		// Run simulator
+	E_SimulatorStates.Stop:
+		// Do nothing
+END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

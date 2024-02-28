@@ -18,6 +18,12 @@
     <LibraryReferences>{322e8dcf-11a7-4008-83c4-a7c3ee797104}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Simulator_example\E_SimulatorStates.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Simulator_example\FB_SimulatorExample.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GlobalTextList.TcGTLO">
       <SubType>Code</SubType>
     </Compile>
@@ -46,6 +52,12 @@
     <Compile Include="Simulator_1.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Simulator_example\P_SimulatorExample.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Simulator_example\ST_WaterTankStates.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Visualization Manager.TcVMO">
       <SubType>Code</SubType>
     </Compile>
@@ -57,6 +69,7 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="Simulator_example" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>

@@ -20,10 +20,8 @@ END_VAR
 	prbar			=> fPrBar
 );
 
-IF NOT HMI.bAuto THEN
-	
-END_IF
 
+P_SimulatorExample();
 ]]></ST>
     </Implementation>
   </POU>
