@@ -3,13 +3,23 @@
   <POU Name="P_SimulatorExample" Id="{b82db5cc-b010-4bfd-97b7-d1f1524186a6}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM P_SimulatorExample
 VAR
-	stWaterTankStates : ST_WaterTankStates(fTankHoleConstant:=0.02,
-										   fTankAria := 1.0,
-										   fDt := 0.01);
+	stWaterTankStates : ST_WaterTankStates;
+	fbSimulatorExample	: FB_SimulatorExample;
+	eSimulatorState		: E_SimulatorStates;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[stWaterTankStates.fSimTime := stWaterTankStates.fSimTime + 0.01;
+      <ST><![CDATA[IF stWaterTankStates.bSimulatorRunning THEN
+	eSimulatorState := E_SimulatorStates.Run;
+ELSE
+	eSimulatorState := E_SimulatorStates.Stop;	
+END_IF
+
+stWaterTankStates.fSimTime := stWaterTankStates.fSimTime + 0.001;
+
+fbSimulatorExample(eSiulatorStates := eSimulatorState,
+				   stWaterTankStates := stWaterTankStates);
+
 ]]></ST>
     </Implementation>
   </POU>

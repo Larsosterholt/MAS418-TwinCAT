@@ -9,15 +9,30 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
+	fY	: REAL;
+	fU 	: REAL;
+	fA	: REAL;
+	fK  : REAL;
+	fDt	: REAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[CASE eSiulatorStates OF
+      <ST><![CDATA[fY := stWaterTankStates.fWaterHeight;
+fU := stWaterTankStates.fFlowIn;
+fA := stWaterTankStates.fTankAria;
+fK := stWaterTankStates.fTankHoleConstant;
+fDt:= stWaterTankStates.fDt;
+
+CASE eSiulatorStates OF
 	E_SimulatorStates.Run:
-		// Run simulator
+		stWaterTankStates.bSimulatorRunning := TRUE;
+		stWaterTankStates.fWaterHeight := fY + fDt*(fU/fA - fK*fY/fA);
 	E_SimulatorStates.Stop:
+		stWaterTankStates.bSimulatorRunning := FALSE;
 		// Do nothing
-END_CASE]]></ST>
+END_CASE
+
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

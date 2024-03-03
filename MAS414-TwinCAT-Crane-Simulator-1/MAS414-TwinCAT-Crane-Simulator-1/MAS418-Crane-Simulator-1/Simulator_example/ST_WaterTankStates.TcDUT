@@ -4,12 +4,12 @@
     <Declaration><![CDATA[TYPE ST_WaterTankStates :
 STRUCT
 	fWaterHeight		: REAL;
-	fTankAria			: REAL := 1;
-	fTankHoleConstant	: REAL;
+	fTankAria			: REAL := 55;
+	fTankHoleConstant	: REAL := 0.05;
 	fSimTime			: REAL;
 	fFlowIn				: REAL;
-	fDt					: REAL;
-	bSimulatorRunning	: BOOL;
+	fDt					: REAL := 0.01;
+	bSimulatorRunning	: BOOL := FALSE;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

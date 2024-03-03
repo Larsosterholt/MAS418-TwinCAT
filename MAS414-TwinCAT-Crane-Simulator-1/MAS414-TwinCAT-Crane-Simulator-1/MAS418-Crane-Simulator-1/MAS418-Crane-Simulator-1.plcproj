@@ -61,6 +61,10 @@
     <Compile Include="Visualization Manager.TcVMO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="VISUs\SimulatorExampleVisu.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
     <Compile Include="VISUs\Visualization.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
