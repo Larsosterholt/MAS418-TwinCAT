@@ -18,6 +18,13 @@
     <LibraryReferences>{322e8dcf-11a7-4008-83c4-a7c3ee797104}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Crane_Controller\Enums\E_RunningStates.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Crane_Controller\GVL\G_HMI.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
     <Compile Include="GlobalTextList.TcGTLO">
       <SubType>Code</SubType>
     </Compile>
@@ -74,14 +81,21 @@
     <Compile Include="Visualization Manager.TcVMO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="VISUs\CraneController.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
     <Compile Include="VISUs\Visualization.TcVIS">
       <SubType>Code</SubType>
       <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Crane_Controller\GVL" />
+    <Folder Include="Crane_Controller\Enums" />
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="Crane_Controller" />
     <Folder Include="Task2" />
     <Folder Include="Task1" />
     <Folder Include="VISUs" />

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="E_RunningStates" Id="{9b8256c7-17b8-4c37-adab-17e648d60200}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_RunningStates :
+(
+	Off,
+	Auto,
+	Manual
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

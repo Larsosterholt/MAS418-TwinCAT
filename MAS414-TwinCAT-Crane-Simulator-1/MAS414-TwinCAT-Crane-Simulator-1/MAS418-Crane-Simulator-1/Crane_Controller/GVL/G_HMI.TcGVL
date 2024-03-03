@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="G_HMI" Id="{72720ed5-c85c-48c4-b589-a11e5f3f0d01}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	eRunningState		: E_RunningStates := E_RunningStates.Off;
+	bRunning			: BOOL;
+	bAuto				: BOOL;
+	bOff				: BOOL;
+	bManual				: BOOL;
+	fJoyX				: REAL;
+	fJoyY				: REAL;	
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>
