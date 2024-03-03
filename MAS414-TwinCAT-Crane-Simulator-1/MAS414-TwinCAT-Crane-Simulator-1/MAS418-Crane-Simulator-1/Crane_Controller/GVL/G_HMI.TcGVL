@@ -3,13 +3,7 @@
   <GVL Name="G_HMI" Id="{72720ed5-c85c-48c4-b589-a11e5f3f0d01}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	eRunningState		: E_RunningStates := E_RunningStates.Off;
-	bRunning			: BOOL;
-	bAuto				: BOOL;
-	bOff				: BOOL;
-	bManual				: BOOL;
-	fJoyX				: REAL;
-	fJoyY				: REAL;	
+stHMIVaribles		: ST_CraneHMIData;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

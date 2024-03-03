@@ -18,12 +18,24 @@
     <LibraryReferences>{322e8dcf-11a7-4008-83c4-a7c3ee797104}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Crane_Controller\Enums\E_ControlBoxMode.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Crane_Controller\Enums\E_RunningStates.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Crane_Controller\GVL\G_HMI.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="Crane_Controller\Interfaces\I_CraneControlBox.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Crane_Controller\POU\FB_VirtualControlBox.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Crane_Controller\Structs\ST_CraneHMIData.TcDUT">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="GlobalTextList.TcGTLO">
       <SubType>Code</SubType>
@@ -93,6 +105,9 @@
   <ItemGroup>
     <Folder Include="Crane_Controller\GVL" />
     <Folder Include="Crane_Controller\Enums" />
+    <Folder Include="Crane_Controller\Interfaces" />
+    <Folder Include="Crane_Controller\Structs" />
+    <Folder Include="Crane_Controller\POU" />
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
     <Folder Include="Crane_Controller" />

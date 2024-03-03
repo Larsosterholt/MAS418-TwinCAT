@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_CraneControlBox" Id="{7fa928ea-614c-44a3-92ed-7937d6777e55}">
+    <Declaration><![CDATA[INTERFACE I_CraneControlBox
+ //   METHOD Mode : E_Mode
+ //   METHOD Status : E_RunningStates; 
+ //   METHOD Joystick : REAL; ]]></Declaration>
+    <Method Name="Joystick" Id="{4b9c46f4-7dd6-4fb6-a9b9-88d9842b0a85}">
+      <Declaration><![CDATA[METHOD Joystick : REAL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Mode" Id="{531ba46a-67e9-4b7c-80e5-9005177cccaf}">
+      <Declaration><![CDATA[METHOD Mode : E_ControlBoxMode
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Status" Id="{06d3e35c-279d-4878-8782-59a575cb1cc7}">
+      <Declaration><![CDATA[METHOD Status : E_RunningStates
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

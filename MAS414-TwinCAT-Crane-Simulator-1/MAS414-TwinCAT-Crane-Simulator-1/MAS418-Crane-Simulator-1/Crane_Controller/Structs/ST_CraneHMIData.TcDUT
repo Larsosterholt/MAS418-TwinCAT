@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="ST_CraneHMIData" Id="{0025e163-92c6-4f5a-b57b-78ebc19918a2}">
+    <Declaration><![CDATA[TYPE ST_CraneHMIData :
+STRUCT
+	eRunningState		: E_ControlBoxMode := E_ControlBoxMode.Off;
+	bStart				: BOOL;
+	bStop				: BOOL;
+	bAuto				: BOOL;
+	bOff				: BOOL;
+	bManual				: BOOL;
+	fJoyX				: REAL;
+	fJoyY				: REAL;	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

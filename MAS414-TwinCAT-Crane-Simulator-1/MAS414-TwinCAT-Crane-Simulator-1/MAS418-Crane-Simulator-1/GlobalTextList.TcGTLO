@@ -60,6 +60,16 @@
               <v n="TextDefault">"On/Off"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
+            <o>
+              <v n="TextID">"154"</v>
+              <v n="TextDefault">"Start"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"258"</v>
+              <v n="TextDefault">"Stop"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
           </l>
           <l n="Languages" t="ArrayList" />
           <v n="GuidInit">{5c86d224-88d0-4887-be8e-2ad8d0e69a9e}</v>
