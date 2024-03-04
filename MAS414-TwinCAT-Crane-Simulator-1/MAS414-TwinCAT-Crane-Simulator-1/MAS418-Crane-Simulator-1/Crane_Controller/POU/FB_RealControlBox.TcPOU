@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_RealControlBox" Id="{e760bdee-97ca-4a12-b73e-bf247f0f3ce6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_RealControlBox IMPLEMENTS I_CraneControlBox
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Joystick" Id="{7024017e-12eb-4310-b9bb-d769ee14219e}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD Joystick : REAL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Joystick := 0.0;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Mode" Id="{124a7371-d47b-4744-bcbe-99bdc418ae05}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD Mode : E_ControlBoxSwitchMode
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Mode := E_ControlBoxSwitchMode.Off;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Status" Id="{dffca296-d0eb-401b-a9eb-bfd24e35a824}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD Status : E_RunningStates
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Status := E_RunningStates.NotReady;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

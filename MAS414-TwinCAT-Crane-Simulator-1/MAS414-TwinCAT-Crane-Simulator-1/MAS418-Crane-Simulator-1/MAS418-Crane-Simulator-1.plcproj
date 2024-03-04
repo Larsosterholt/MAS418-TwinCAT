@@ -31,6 +31,12 @@
     <Compile Include="Crane_Controller\Interfaces\I_CraneControlBox.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Crane_Controller\POU\FB_ControlBox.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Crane_Controller\POU\FB_RealControlBox.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Crane_Controller\POU\FB_VirtualControlBox.TcPOU">
       <SubType>Code</SubType>
     </Compile>

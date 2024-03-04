@@ -14,10 +14,19 @@ END_VAR
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="Joystick" Id="{5ea5c0dd-9f95-49a5-908c-6a7dd1b9a81a}">
-      <Declaration><![CDATA[METHOD Joystick : REAL
-]]></Declaration>
+      <Declaration><![CDATA[METHOD Joystick : REAL;
+
+VAR 
+	fTemp		: REAL;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Joystick := stCranHMIVaribels.fJoyX * 2.0/32767.0 - 1;]]></ST>
+        <ST><![CDATA[fTemp := stCranHMIVaribels.fJoyX * 2.0/32767.0 - 1;
+
+IF ABS(fTemp) <= 0.05 THEN
+	Joystick := 0.0;
+ELSE
+	Joystick := fTemp;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="Mode" Id="{3b20504c-eddc-4766-aee1-8ca5506d6f63}">
@@ -29,19 +38,55 @@ Mode := stCranHMIVaribels.eMode;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Status" Id="{3b669f13-e677-405d-846b-051f4ce97bbc}">
-      <Declaration><![CDATA[{warning 'add method implementation '}
-METHOD Status : E_RunningStates
-]]></Declaration>
+      <Declaration><![CDATA[METHOD Status : E_RunningStates
+
+
+VAR 
+	eTemp : E_RunningStates;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[UpdateRunningMode();
 
-IF stCranHMIVaribels.eMode = E_ControlBoxSwitchMode.Off THEN
-	stCranHMIVaribels.eRunningState := E_RunningStates.NotReady;
-ELSIF (stCranHMIVaribels.eMode = E_ControlBoxSwitchMode.Manual) OR (stCranHMIVaribels.eMode = E_ControlBoxSwitchMode.Auto) THEN
-	stCranHMIVaribels.eRunningState := E_RunningStates.Ready;
+//IF stCranHMIVaribels.eMode = E_ControlBoxSwitchMode.Off AND NOT (stCranHMIVaribels.eRunningState = E_RunningStates.Ready)THEN
+//	stCranHMIVaribels.eRunningState := E_RunningStates.NotReady;
+//ELSIF (stCranHMIVaribels.eMode = E_ControlBoxSwitchMode.Manual) OR (stCranHMIVaribels.eMode = E_ControlBoxSwitchMode.Auto) THEN
+//	stCranHMIVaribels.eRunningState := E_RunningStates.Ready;
+//ELSIF stCranHMIVaribels.bStart THEN
+//	stCranHMIVaribels.eRunningState := E_RunningStates.Starting;
+//ELSIF (stCranHMIVaribels.eRunningState = E_RunningStates.Ready) THEN
+//	stCranHMIVaribels.eRunningState := E_RunningStates.Running;
+//ELSIF (stCranHMIVaribels.eMode = E_ControlBoxSwitchMode.Off) AND (Joystick() <= 0.01) THEN
+//	stCranHMIVaribels.eRunningState := E_RunningStates.Stopping;
+//END_IF
+
+//Status := stCranHMIVaribels.eRunningState;
+
+
+
+IF Mode() = E_ControlBoxSwitchMode.Off THEN
+	eTemp := E_RunningStates.NotReady;
+	stCranHMIVaribels.eRunningState := eTemp;
+	Status := eTemp;
+	RETURN;
+ELSIF NOT (Mode() = E_ControlBoxSwitchMode.Off) AND NOT (stCranHMIVaribels.eRunningState = E_RunningStates.Running) THEN
+	eTemp := E_RunningStates.Ready;	
 END_IF
 
-Status := stCranHMIVaribels.eRunningState;]]></ST>
+IF stCranHMIVaribels.bStart AND NOT (stCranHMIVaribels.eRunningState = E_RunningStates.Running) THEN
+	eTemp := E_RunningStates.Starting;
+END_IF
+
+IF NOT (Mode() = E_ControlBoxSwitchMode.Off) AND stCranHMIVaribels.bStart THEN
+	eTemp := E_RunningStates.Running;
+END_IF
+
+IF NOT stCranHMIVaribels.bStart AND ABS(Joystick()) >= 0.01 THEN
+	eTemp := E_RunningStates.Stopping;
+END_IF
+
+stCranHMIVaribels.eRunningState := eTemp;
+Status := eTemp;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="UpdateRunningMode" Id="{cb21d27b-2cce-41f5-bbc0-67323750fa22}">

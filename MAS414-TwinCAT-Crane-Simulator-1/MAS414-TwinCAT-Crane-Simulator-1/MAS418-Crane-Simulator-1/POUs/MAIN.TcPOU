@@ -8,6 +8,7 @@ VAR
 	
 	fTestVarJoy				: REAL;
 	eTestRunMode			: E_ControlBoxSwitchMode;
+	eTestRunninStates		: E_RunningStates;
 	
 END_VAR
 ]]></Declaration>
@@ -19,7 +20,9 @@ P_Task2();
 
 
 eTestRunMode := fbVirtualControlBox.Mode();
-fTestVarJoy := fbVirtualControlBox.Joystick();]]></ST>
+fTestVarJoy := fbVirtualControlBox.Joystick();
+eTestRunninStates := fbVirtualControlBox.Status();
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
