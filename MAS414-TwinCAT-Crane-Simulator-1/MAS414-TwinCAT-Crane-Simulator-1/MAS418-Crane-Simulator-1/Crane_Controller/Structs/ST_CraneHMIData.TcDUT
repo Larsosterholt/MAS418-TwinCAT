@@ -3,12 +3,13 @@
   <DUT Name="ST_CraneHMIData" Id="{0025e163-92c6-4f5a-b57b-78ebc19918a2}">
     <Declaration><![CDATA[TYPE ST_CraneHMIData :
 STRUCT
-	eRunningState		: E_ControlBoxMode := E_ControlBoxMode.Off;
+	eMode		: E_ControlBoxSwitchMode := E_ControlBoxSwitchMode.Off;
+	eRunningState 		: E_RunningStates;
 	bStart				: BOOL;
-	bStop				: BOOL;
+	//bStop				: BOOL;
 	bAuto				: BOOL;
-	bOff				: BOOL;
-	bManual				: BOOL;
+	bOn					: BOOL;
+	//bManual				: BOOL;
 	fJoyX				: REAL;
 	fJoyY				: REAL;	
 END_STRUCT

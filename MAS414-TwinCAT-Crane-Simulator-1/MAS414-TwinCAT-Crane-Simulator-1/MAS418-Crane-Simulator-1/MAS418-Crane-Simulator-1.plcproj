@@ -18,7 +18,7 @@
     <LibraryReferences>{322e8dcf-11a7-4008-83c4-a7c3ee797104}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Crane_Controller\Enums\E_ControlBoxMode.TcDUT">
+    <Compile Include="Crane_Controller\Enums\E_ControlBoxSwitchMode.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Crane_Controller\Enums\E_RunningStates.TcDUT">

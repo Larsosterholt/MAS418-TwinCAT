@@ -4,17 +4,15 @@
     <Declaration><![CDATA[PROGRAM P_Simulator
 VAR
 	fbSimulator 			: FB_CraneSimulator;
-	stCraneHMIData			: REFERENCE TO ST_CraneHMIData;
-	fbVirtualControlBox		: FB_VirtualControlBox;
 	bSimulatorOn 			: BOOL;
 	fCylPos 				: LREAL;
 	fUDCV					: LREAL;
 	
-	fTestVarJoy				: REAL;
+
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[stCraneHMIData REF= G_HMI.stHMIVaribles;
+      <ST><![CDATA[//stCraneHMIData REF= G_HMI.stHMIVaribles;
 
 fbSimulator(
 	ssMethodType 	:= BOOL_TO_SINT(bSimulatorOn),
@@ -24,7 +22,10 @@ fbSimulator(
 
 
 
-fTestVarJoy := fbVirtualControlBox.Joystick();]]></ST>
+
+
+
+//	rTimeVar			: REFERENCE TO TIME := G_Task1.tdTimeVar;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

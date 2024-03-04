@@ -12,7 +12,7 @@ END_VAR
 ]]></Declaration>
     </Method>
     <Method Name="Mode" Id="{531ba46a-67e9-4b7c-80e5-9005177cccaf}">
-      <Declaration><![CDATA[METHOD Mode : E_ControlBoxMode
+      <Declaration><![CDATA[METHOD Mode : E_ControlBoxSwitchMode
 VAR_INPUT
 END_VAR
 ]]></Declaration>

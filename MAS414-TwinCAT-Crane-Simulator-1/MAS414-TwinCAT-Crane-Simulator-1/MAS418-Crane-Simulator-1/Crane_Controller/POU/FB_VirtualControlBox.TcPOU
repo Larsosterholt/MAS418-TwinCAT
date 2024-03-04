@@ -3,42 +3,29 @@
   <POU Name="FB_VirtualControlBox" Id="{622528cd-5650-44d7-9bcf-28eeafb53948}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_VirtualControlBox IMPLEMENTS I_CraneControlBox
 VAR_INPUT
+		stCranHMIVaribels		: REFERENCE TO ST_CraneHMIData; // From FB_Init
 END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	stCranHMIVaribels		: REFERENCE TO ST_CraneHMIData; // From FB_Init
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{0a9ddb92-dacb-4127-a790-6299cfde9db9}">
-      <Declaration><![CDATA[METHOD FB_init : BOOL
-VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	stCranHMIVaribelsInit	: REFERENCE TO ST_CraneHMIData;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[stCranHMIVaribels := stCranHMIVaribelsInit;]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="Joystick" Id="{5ea5c0dd-9f95-49a5-908c-6a7dd1b9a81a}">
-      <Declaration><![CDATA[{warning 'add method implementation '}
-METHOD Joystick : REAL
+      <Declaration><![CDATA[METHOD Joystick : REAL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Joystick := stCranHMIVaribels.fJoyX * 32767.0/2.0 - 1;]]></ST>
+        <ST><![CDATA[Joystick := stCranHMIVaribels.fJoyX * 2.0/32767.0 - 1;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Mode" Id="{3b20504c-eddc-4766-aee1-8ca5506d6f63}">
-      <Declaration><![CDATA[{warning 'add method implementation '}
-METHOD Mode : E_ControlBoxMode
+      <Declaration><![CDATA[METHOD Mode : E_ControlBoxSwitchMode
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[UpdateRunningMode();
+Mode := stCranHMIVaribels.eMode;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Status" Id="{3b669f13-e677-405d-846b-051f4ce97bbc}">
@@ -46,7 +33,35 @@ METHOD Mode : E_ControlBoxMode
 METHOD Status : E_RunningStates
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[UpdateRunningMode();
+
+IF stCranHMIVaribels.eMode = E_ControlBoxSwitchMode.Off THEN
+	stCranHMIVaribels.eRunningState := E_RunningStates.NotReady;
+ELSIF (stCranHMIVaribels.eMode = E_ControlBoxSwitchMode.Manual) OR (stCranHMIVaribels.eMode = E_ControlBoxSwitchMode.Auto) THEN
+	stCranHMIVaribels.eRunningState := E_RunningStates.Ready;
+END_IF
+
+Status := stCranHMIVaribels.eRunningState;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UpdateRunningMode" Id="{cb21d27b-2cce-41f5-bbc0-67323750fa22}">
+      <Declaration><![CDATA[METHOD PRIVATE UpdateRunningMode : REAL
+VAR_INPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT stCranHMIVaribels.bOn THEN
+	stCranHMIVaribels.eMode := E_ControlBoxSwitchMode.Off;
+	RETURN;
+ELSIF stCranHMIVaribels.bAuto THEN
+	stCranHMIVaribels.eMode := E_ControlBoxSwitchMode.Manual;
+ELSE
+	stCranHMIVaribels.eMode := E_ControlBoxSwitchMode.Auto; 
+END_IF
+
+]]></ST>
       </Implementation>
     </Method>
   </POU>
