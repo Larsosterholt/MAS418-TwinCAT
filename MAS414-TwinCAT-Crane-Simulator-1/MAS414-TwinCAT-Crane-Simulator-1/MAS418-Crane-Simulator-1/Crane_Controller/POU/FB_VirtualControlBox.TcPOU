@@ -18,7 +18,7 @@ END_VAR
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	stCranHMIVaribelsInit		: REFERENCE TO ST_CraneHMIData;
+	stCranHMIVaribelsInit	: REFERENCE TO ST_CraneHMIData;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -30,7 +30,7 @@ END_VAR
 METHOD Joystick : REAL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[Joystick := stCranHMIVaribels.fJoyX * 32767.0/2.0 - 1;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Mode" Id="{3b20504c-eddc-4766-aee1-8ca5506d6f63}">

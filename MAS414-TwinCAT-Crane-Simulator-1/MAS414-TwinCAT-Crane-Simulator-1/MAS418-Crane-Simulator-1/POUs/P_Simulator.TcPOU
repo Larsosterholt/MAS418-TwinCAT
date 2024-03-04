@@ -3,14 +3,20 @@
   <POU Name="P_Simulator" Id="{efa2403d-d7ed-4f84-a9c5-e4543ee5f98b}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM P_Simulator
 VAR
-	fbSimulator 	: FB_CraneSimulator;
-	bSimulatorOn 	: BOOL;
-	fCylPos 		: LREAL;
-	fUDCV			: LREAL;
+	fbSimulator 			: FB_CraneSimulator;
+	stCraneHMIData			: REFERENCE TO ST_CraneHMIData;
+	fbVirtualControlBox		: FB_VirtualControlBox;
+	bSimulatorOn 			: BOOL;
+	fCylPos 				: LREAL;
+	fUDCV					: LREAL;
+	
+	fTestVarJoy				: REAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbSimulator(
+      <ST><![CDATA[stCraneHMIData REF= G_HMI.stHMIVaribles;
+
+fbSimulator(
 	ssMethodType 	:= BOOL_TO_SINT(bSimulatorOn),
 	uDCV			:= fUDCV,
 	xm 				=> fCylPos
@@ -18,7 +24,7 @@ END_VAR
 
 
 
-]]></ST>
+fTestVarJoy := fbVirtualControlBox.Joystick();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

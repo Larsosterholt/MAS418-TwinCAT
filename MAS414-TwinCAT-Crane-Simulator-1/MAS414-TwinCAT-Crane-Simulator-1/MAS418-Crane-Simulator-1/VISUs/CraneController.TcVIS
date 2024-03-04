@@ -23,7 +23,7 @@
                         </o>
                         <o>
                           <v n="Id">3837067714L</v>
-                          <v n="Value" t="Single">100</v>
+                          <v n="Value" t="Single">32767</v>
                         </o>
                         <o>
                           <v n="Id">2867424708L</v>
