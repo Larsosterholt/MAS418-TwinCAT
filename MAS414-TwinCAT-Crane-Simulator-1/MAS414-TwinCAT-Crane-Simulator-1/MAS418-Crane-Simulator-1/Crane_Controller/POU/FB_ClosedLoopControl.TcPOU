@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_ClosedLoopControl" Id="{f46bfeb3-e913-483e-ba1b-7cb6263f9ca4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ClosedLoopControl
+VAR_INPUT
+	bEnable				: BOOL;
+	fPGain				: REAL;
+	fPositionRef		: REAL;
+	fPositionFeedback	: REAL;
+END_VAR
+VAR_OUTPUT
+	fPositionError		: REAL;
+	fUPFB				: REAL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bEnable THEN
+	fUPFB := (fPositionRef - fPositionFeedback)*fPGain;
+
+ELSE
+	fUPFB := 0.0;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

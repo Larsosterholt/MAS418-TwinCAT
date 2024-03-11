@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_OpenLoopControl" Id="{4030bcdd-a25c-4778-a3e3-7a15e628104c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_OpenLoopControl
+VAR_INPUT
+	bEnable			: BOOL;
+	fVRef			: REAL;
+
+END_VAR
+VAR_OUTPUT
+	fUDCV			: REAL;
+END_VAR
+VAR
+	fTemp			: REAL;
+	fBoreArea		: REAL := 0.0033183;
+	fAnnulusArea	: REAL := 0.0023562;
+	fQMax			: REAL := 20.0;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bEnable THEN
+	
+	IF fVRef <= 0 THEN
+		fTemp := fVRef*fBoreArea*60000.0;
+	ELSE
+		fTemp := fVRef*fAnnulusArea*60000.0;
+	END_IF
+	
+fUDCV := fTemp/fQMax;
+ELSE
+	fUDCV := 0;
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_AutoMode" Id="{21797d57-0a20-4486-9323-c46297e0d39d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_AutoMode
+VAR_INPUT
+	fbControlBoxInterface		: REFERENCE TO I_CraneControlBox;
+	stMotionGeneratorData		: ST_MotionGeneratorData;
+	bEnable						: BOOL;
+END_VAR
+VAR_OUTPUT
+	fUDCV 						: REAL;
+END_VAR
+VAR
+	fbColsedLoopController		: FB_ClosedLoopControl;
+	fbOpenLoopController		: FB_OpenLoopControl;
+	fbMotionGen					: FB_MotionReferenceGenerator;
+	fbTon						: TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT (fbControlBoxInterface.Mode() = E_ControlBoxSwitchMode.Off) THEN
+	fUDCV := 0;
+	RETURN;
+END_IF
+
+// Start timer
+fbTon(IN := bEnable,
+	  PT := T#100000MS);
+
+fbMotionGen(bEnable 	:= bEnable,
+			fClock_s	:= TO_REAL(fbTon.ET),
+			fStartPosition_m := stMotionGeneratorData.fStartPosition_m,
+			fStartVelocity_m := stMotionGeneratorData.fStartVelocity_m,
+			fPositionSetpoint_m := stMotionGeneratorData.fPositionSetpoint_m,
+			fVelocitySetpoint_m := stMotionGeneratorData.fVelocitySetpoint_m,
+			fTimeBeforeStarting_s := stMotionGeneratorData.fTimeBeforeStarting_s,
+			fRampTime_s := stMotionGeneratorData.fRampTime_s,
+			fHoldPositionTime_s := stMotionGeneratorData.fHoldPositionTime_s);
+			
+fbOpenLoopController(bEnable := bEnable,
+					fVRef := fbMotionGen.fVelocityReference_m);
+
+fbColsedLoopController(bEnable := bEnable,
+						fPositionRef := fbMotionGen.fPositionReference_m);
+						
+fUDCV := fbColsedLoopController.fUPFB + fbOpenLoopController.fUDCV;
+
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

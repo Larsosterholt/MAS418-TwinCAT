@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="ST_MotionGeneratorData" Id="{7f1951ac-d05f-4c50-9dd4-443d132a5d57}">
+    <Declaration><![CDATA[TYPE ST_MotionGeneratorData :
+STRUCT
+	fStartPosition_m: LREAL;
+	fStartVelocity_m: LREAL;
+	fPositionSetpoint_m: LREAL;
+	fVelocitySetpoint_m: LREAL;
+	fTimeBeforeStarting_s: LREAL;
+	fRampTime_s: LREAL;
+	fHoldPositionTime_s: LREAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

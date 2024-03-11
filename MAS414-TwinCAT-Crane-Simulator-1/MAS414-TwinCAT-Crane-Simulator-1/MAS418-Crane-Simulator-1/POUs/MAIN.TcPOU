@@ -3,12 +3,7 @@
   <POU Name="MAIN" Id="{7beae7c3-c9f1-44dc-9799-7da82ef4218c}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	stCraneHMIData			: REFERENCE TO ST_CraneHMIData := G_HMI.stHMIVaribles;
-	fbVirtualControlBox		: FB_VirtualControlBox := (stCranHMIVaribels := stCraneHMIData);
-	
-	fTestVarJoy				: REAL;
-	eTestRunMode			: E_ControlBoxSwitchMode;
-	eTestRunninStates		: E_RunningStates;
+	//fbVirtualControlBox			: FB_VirtualControlBox;
 	
 END_VAR
 ]]></Declaration>
@@ -16,12 +11,6 @@ END_VAR
       <ST><![CDATA[P_Task1();
 P_Task2();
 
-
-
-
-eTestRunMode := fbVirtualControlBox.Mode();
-fTestVarJoy := fbVirtualControlBox.Joystick();
-eTestRunninStates := fbVirtualControlBox.Status();
 ]]></ST>
     </Implementation>
   </POU>

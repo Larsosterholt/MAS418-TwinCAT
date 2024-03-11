@@ -1,16 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="FB_ControlBox" Id="{42985098-b703-49ac-aeba-5b1109adc9bb}" SpecialFunc="None">
+  <POU Name="FB_ControlBox" Id="{ae09b732-66a4-4f77-945e-30289f0c2e12}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_ControlBox
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
+	_iControlBox	: REFERENCE TO I_CraneControlBox;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[	
+	]]></ST>
     </Implementation>
+    <Method Name="FB_init" Id="{02d6049f-41d9-450b-a04f-37e1351af98d}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	iControlBox		: REFERENCE TO I_CraneControlBox;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_iControlBox := iControlBox;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Joystick" Id="{89f00d27-96aa-45e0-9ebc-f1fe21e4a430}">
+      <Declaration><![CDATA[METHOD Joystick : REAL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Joystick := _iControlBox.Joystick();]]></ST>
+      </Implementation>
+    </Method>
   </POU>
 </TcPlcObject>

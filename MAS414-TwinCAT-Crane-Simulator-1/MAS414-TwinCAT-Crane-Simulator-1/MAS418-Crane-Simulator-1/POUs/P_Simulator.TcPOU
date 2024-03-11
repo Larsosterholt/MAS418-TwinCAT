@@ -7,25 +7,58 @@ VAR
 	bSimulatorOn 			: BOOL;
 	fCylPos 				: LREAL;
 	fUDCV					: LREAL;
+	ppbar					: LREAL;
+	prbar					: LREAL;
 	
-
+	
+	fbControlboxInterface	: I_CraneControlBox;
+	fbVirtualControlbox		: FB_VirtualControlBox;
+	
+	fbManualMode			: FB_ManualMode;
+	fbAutoMode				: FB_AutoMode;
+	
+	stMotionGeneratorData	: ST_MotionGeneratorData;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[//stCraneHMIData REF= G_HMI.stHMIVaribles;
 
+fbControlboxInterface := fbVirtualControlbox;
+fbManualMode(fbControlBoxInterface := fbControlboxInterface);
+fbAutoMode(fbControlBoxInterface := fbControlboxInterface);
+
+IF fbControlboxInterface.Mode() = E_ControlBoxSwitchMode.Manual THEN
+	fbManualMode();
+	fUDCV := TO_LREAL(fbManualMode.fUCV);
+	
+ELSIF fbControlboxInterface.Mode() = E_ControlBoxSwitchMode.Auto THEN
+	// Generate data for motion ref
+	stMotionGeneratorData.fHoldPositionTime_s := 1.0;
+	stMotionGeneratorData.fPositionSetpoint_m := 0.2;
+	stMotionGeneratorData.fRampTime_s := 2.0;
+	stMotionGeneratorData.fStartPosition_m := fbSimulator.xm;
+	stMotionGeneratorData.fStartVelocity_m := 0.0;
+	stMotionGeneratorData.fTimeBeforeStarting_s := 2.0;
+	stMotionGeneratorData.fVelocitySetpoint_m := 0.02;
+	
+	fbAutoMode(fbControlBoxInterface := fbControlboxInterface,
+			   bEnable := NOT (fbControlboxInterface.Mode() = E_ControlBoxSwitchMode.Off),
+			   stMotionGeneratorData := stMotionGeneratorData);
+	fUDCV := TO_LREAL(fbAutoMode.fUDCV);
+END_IF
+
+
+
+
 fbSimulator(
-	ssMethodType 	:= BOOL_TO_SINT(bSimulatorOn),
+	ssMethodType 	:= BOOL_TO_SINT(NOT (fbControlboxInterface.Mode() = E_ControlBoxSwitchMode.Off)),
 	uDCV			:= fUDCV,
-	xm 				=> fCylPos
-);
+	xm 				=> fCylPos,
+	ppbar 			=> ppbar,
+	prbar			=> prbar);
 
 
-
-
-
-
-//	rTimeVar			: REFERENCE TO TIME := G_Task1.tdTimeVar;]]></ST>
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
